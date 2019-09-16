@@ -64,6 +64,7 @@ let promptCustomer = () => {
 
         let total = res[0].price * quantity;
         let sQuantity = res[0].stock_quantity - quantity;
+        let pSales = res[0].product_sales + total;
 
         if (err) throw err;
 
@@ -82,6 +83,16 @@ let promptCustomer = () => {
             Your total is : $${total}
             There are ${sQuantity} left in stock!
             `);
+
+          });
+
+          query = `UPDATE products SET product_sales = ${pSales} WHERE item_id = ${id}`;
+
+          connection.query(query, (err, res) => {
+
+            console.log(`
+            The products total sales are ${pSales};
+            `)
 
           });
 
