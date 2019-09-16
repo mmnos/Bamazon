@@ -16,7 +16,7 @@ const connection = mysql.createConnection({
 
 });
 
-connection.connect(function(err) {
+connection.connect((err) => {
 
   if (err) throw err;
 
@@ -30,7 +30,7 @@ let promptCustomer = () => {
 
   let displayProd = `SELECT * FROM products`
   
-  connection.query(displayProd, function(err, res) {
+  connection.query(displayProd, (err, res) => {
 
     if (err) throw err;
 
@@ -60,7 +60,7 @@ let promptCustomer = () => {
 
       let query = `SELECT * FROM products WHERE item_id = ${id}`;
 
-      connection.query(query, function(err, res) {
+      connection.query(query, (err, res) => {
 
         let total = res[0].price * quantity;
         let sQuantity = res[0].stock_quantity - quantity;
@@ -75,7 +75,7 @@ let promptCustomer = () => {
 
           query = `UPDATE products SET stock_quantity = stock_quantity - ${quantity} WHERE item_id = ${id}`;
 
-          connection.query(query, function(err, res) {
+          connection.query(query, (err, res) => {
 
             console.log(`
             ORDER COMPLETE!
