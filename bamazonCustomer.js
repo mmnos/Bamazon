@@ -24,8 +24,6 @@ connection.connect(function(err) {
 
   promptCustomer();
 
-  // connection.end();
-
 });
 
 let promptCustomer = () => {
@@ -36,8 +34,16 @@ let promptCustomer = () => {
 
     if (err) throw err;
 
-    console.log("DISPLAYS ITEMS");
-    console.log(res);
+    res.forEach((r) => {
+      console.log("******************************")
+      console.log(`
+      Item ID : ${r.item_id}
+      Name : ${r.product_name}
+      Department : ${r.department_name}
+      Price : $${r.price}
+      Quantity : ${r.stock_quantity}
+      `);
+    });
 
     inquirer.prompt([
       {
@@ -66,19 +72,18 @@ let promptCustomer = () => {
           console.log("INSUFFICIENT QUANTITY");
           
         } else {
-          
-          console.log("ORDER COMPLETE");
 
           query = `UPDATE products SET stock_quantity = stock_quantity - ${quantity} WHERE item_id = ${id}`;
 
           connection.query(query, function(err, res) {
 
             console.log(`
+            ORDER COMPLETE!
             Your total is : $${total}
             There are ${sQuantity} left in stock!
             `);
 
-          })
+          });
 
         }
 
