@@ -72,13 +72,11 @@ let viewSales = () => {
 
     if (err) throw err;
 
-    console.log("\n **************************************************************************");
     console.table(res);
 
+    promptSupervisor();
   });
 
-  promptSupervisor();
-  
 }
 
 let createDep = () => {
@@ -104,9 +102,9 @@ let createDep = () => {
 
       console.log(`You've added ${department} as a new department!`);
 
+      promptSupervisor();
     });
 
-    promptSupervisor();
 
   });
 

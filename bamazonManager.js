@@ -149,10 +149,10 @@ let addInventory = () => {
         You've added ${amount} more to item #${itemID}
         `);
 
+        promptManager();
       });
 
     });
-    promptManager();
   })
 
 }
@@ -190,9 +190,9 @@ let newProduct = () => {
 
       console.log(`You've added a ${product} to the database`);
 
+      promptManager();
     });
 
-    promptManager();
 
   });
 
