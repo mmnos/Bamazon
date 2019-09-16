@@ -137,7 +137,7 @@ let addInventory = () => {
 
     connection.query(query, (err, res) => {
 
-      let addStock = res[0].stock_quantity + amount;
+      // let addStock = res[0].stock_quantity + amount;
 
       if (err) throw err;
 
@@ -160,26 +160,26 @@ let addInventory = () => {
 let newProduct = () => {
 
   inquirer.prompt([
-    
+
     {
       name : "product",
       type : "input",
-      message : "Enter the products name"
+      message : "Enter the products name :"
     },
     {
       name : "department",
       type : "input",
-      message : "Enter the department name"
+      message : "Enter the department name :"
     },
     {
       name : "price",
       type : "input",
-      message : "Enter the price"
+      message : "Enter the price :"
     },
     {
       name : "quantity",
       type : "input",
-      message : "Enter the quantity of the product"
+      message : "Enter the quantity of the product :"
     }
 
   ]).then(({product, department, price, quantity}) => {
