@@ -21,8 +21,6 @@ connection.connect((err) => {
 
   if (err) throw err;
 
-  console.log("connected");
-
   promptSupervisor();
 
 });
@@ -64,9 +62,10 @@ let promptSupervisor = () => {
 
 let viewSales = () => {
 
-  let query = `SELECT departments.department_id, departments.department_name, departments.over_head_costs, products.product_sales, (departments.over_head_costs - products.product_sales) AS total_profit `;
+  let query = `SELECT departments.department_id, departments.department_name, departments.over_head_costs, SUM(products.product_sales) AS product_sales, `;
+  query += `SUM(products.product_sales) - departments.over_head_costs AS total_profit `;
   query += `FROM departments INNER JOIN products ON departments.department_name = products.department_name `;
-  query += `GROUP BY department_id, department_name, product_sales ORDER BY department_id ASC`;
+  query += `GROUP BY department_id, department_name ORDER BY department_id ASC `;
 
   connection.query(query, (err, res) => {
 
@@ -75,6 +74,7 @@ let viewSales = () => {
     console.table(res);
 
     promptSupervisor();
+    
   });
 
 }
@@ -103,6 +103,7 @@ let createDep = () => {
       console.log(`You've added ${department} as a new department!`);
 
       promptSupervisor();
+      
     });
 
 

@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const mysql = require("mysql");
 const inquirer = require("inquirer");
+const cTable = require("console.table");
 
 const connection = mysql.createConnection({
 
@@ -19,8 +20,6 @@ const connection = mysql.createConnection({
 connection.connect((err) => {
 
   if (err) throw err;
-
-  console.log("connected");
 
   promptManager();
 
@@ -79,16 +78,10 @@ let viewProducts = () => {
 
     if (err) throw err;
 
-    res.forEach((r) => {
-      console.log("******************************")
-      console.log(`
-      Item ID : ${r.item_id}
-      Name : ${r.product_name}
-      Price : $${r.price}
-      Quantity : ${r.stock_quantity}
-      `);
-    });
+    console.table(res);
+
     promptManager();
+
   });
 
 }
@@ -101,17 +94,10 @@ let lowInventory = () => {
 
     if (err) throw err;
 
-    res.forEach((r) => {
-      console.log("******************************")
-      console.log(`
-      Item ID : ${r.item_id}
-      Name : ${r.product_name}
-      Department : ${r.department_name}
-      Price : $${r.price}
-      Quantity : ${r.stock_quantity}
-      `);
-    });
+    console.table(res);
+
     promptManager();
+
   })
 
 }

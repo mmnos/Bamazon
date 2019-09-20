@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const mysql = require("mysql");
 const inquirer = require("inquirer");
+const cTable = require("console.table");
 
 const connection = mysql.createConnection({
 
@@ -20,8 +21,6 @@ connection.connect((err) => {
 
   if (err) throw err;
 
-  console.log("connected");
-
   promptCustomer();
 
 });
@@ -34,16 +33,7 @@ let promptCustomer = () => {
 
     if (err) throw err;
 
-    res.forEach((r) => {
-      console.log("******************************")
-      console.log(`
-      Item ID : ${r.item_id}
-      Name : ${r.product_name}
-      Department : ${r.department_name}
-      Price : $${r.price}
-      Quantity : ${r.stock_quantity}
-      `);
-    });
+    console.table(res);
 
     inquirer.prompt([
       {
